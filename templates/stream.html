@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% for post in stream %}
+<div class="row">
+<div class="col-lg-8 col-lg-offset-2">
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<h5 class="text-left"><span class="glyphicon glyphicon-user"></span>
+				<a href="{{ url_for('stream', username=post.user.username) }}">{{ post.user.username }}</a>
+			</h5>
+				
+		</div>
+		<div class="panel-body">
+			<p class="text-center posts">{{ post.content }}</p>
+			<p class="text-right"><small><span class="glyphicon glyphicon-time"></span> {{ post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</small></p>
+		</div>
+	</div>
+</div>
+</div>
+{% endfor %}
+{% endblock %}

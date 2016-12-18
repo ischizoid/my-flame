@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% from 'macros.html' import render_field %}
+{% block content %}
+<div class="row">
+<div class="col-lg-4 col-lg-offset-4 text-center">
+<form method="POST" action="" class="form">
+	{{ form.hidden_tag() }}
+	{% for field in form %}
+		{{ render_field(field) }}
+		<br>
+	{% endfor %}
+	<button type="submit" class="btn btn-lg btn-success" id="submit">Register!</button>
+</form>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "stream.html" %}
+
+{% block content %}
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"></li>
+</ul>
+<div class="row">
+	<div class="col-md-3">
+	
+		<h3>{{ user.username }}</h3>
+	<br>
+	</div>
+	<div class="col-md-2 text-center">
+		<h5>Posts</h5>
+		<p>{{ user.posts.count() }}</p>
+	</div>
+	<div class="col-md-2 text-center">
+		<h5>Followers</h5>
+		<p>{{ user.followers().count() }}</p>
+	</div>
+	<div class="col-md-2 text-center">
+		<h5>Following</h5>
+		<p>{{ user.following().count() }}</p>
+	</div>
+	<div class="col-md-2 col-md-offset-1">
+	<br>
+	{% if current_user.is_authenticated %}
+		{% if user != current_user %}
+			{% if not user in current_user.following() %}
+				<a class="btn btn-success btn-lg" href="{{ url_for('follow', username=user.username) }}" role="button">Follow</a>
+			{% else %}
+				<a class="btn btn-danger btn-lg" href="{{ url_for('unfollow', username=user.username) }}" role="button">Unfollow</a>
+			{% endif %}
+		{% endif %}
+	{% endif %}
+	<br>
+	</div>
+</div>
+{{ super() }}
+{% endblock %}
